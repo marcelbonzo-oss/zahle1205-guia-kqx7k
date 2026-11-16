@@ -266,7 +266,7 @@ h2.big{font-size:clamp(38px,7.4vw,68px);line-height:.98}
 .ticks{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10px;color:var(--muted);margin-top:4px}
 
 /* places */
-.groups{display:grid;gap:32px}
+.groups{display:grid;gap:32px;align-content:start}
 .groups.cols{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:36px 56px;align-items:start}
 .grp h3{margin-bottom:10px;display:flex;align-items:center;gap:10px}
 .grp h3 svg.ic{width:22px;height:22px;color:var(--oak)}
@@ -403,36 +403,42 @@ dialog img{width:100%;max-height:80vh;object-fit:contain;border-radius:8px}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(30px);background:var(--graphite);color:var(--on-graphite);padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;transition:.25s;pointer-events:none;z-index:50}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-/* ---------- print / PDF: A4, light, no controls ---------- */
-@page{size:A4;margin:11mm}
+/* ---------- print / PDF: full-bleed A4 pages with the same colours, dark bands, icons and shadows as the site ---------- */
+@page{size:A4;margin:0}
 @media print{
   html{scroll-behavior:auto}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  body{background:#fff;font-size:14px}
   .bar,.fab,.zoom,.layers,.filters,.toast,dialog,#call-btn,.btn[data-copy],.btn[data-copy-text],.mapfoot,.lang,.no-print{display:none!important}
-  .band.night{--bg:#F3F1ED;--bg-2:#F3F1ED;--surface:#FFFFFF;--sunk:#E3DFD8;--ink:#25292C;--muted:#5E6266;--line:#DBD7D0;--graphite:#42464A;--on-graphite:#F4F2EE;--oak:#8A5C29;--oak-soft:#EFE3D0;--coral:#B65A40;--coral-soft:#F6E4DC;--on-coral:#FFFFFF;--sage:#5F7250;--shadow:none;background:#F3F1ED;color:#25292C}
-  .band{background:#fff}.band.tint{background:#F3F1ED}.band.night{background:#F3F1ED}
-  .pass.night{background:#2A2D30}
-  .sec{padding-block:26px 18px}.sec-head{margin-bottom:16px}
-  h2{font-size:27px}h2.big{font-size:34px}.hero-text h1{font-size:38px}
-  .hero-photo img{max-height:76mm}
-  .quick{grid-template-columns:repeat(4,minmax(0,1fr))}.q.wide2{grid-column:auto}
-  #boas-vindas,#restaurantes,#saida{break-before:page}
-  .place{padding-block:7px}.groups{gap:20px}.ess{gap:22px 36px}#perto .sec-head{margin-bottom:10px}
-  .grp{break-inside:avoid}
-  .q,.hosts,.rule,.ap,.mapbox,.metro,.pass{box-shadow:none}
-  .rule,.q,.r,.ap,.place,.steps li,.hosts,.cred,.heads-up,.metro,.fact,.shot,.detail,.addr,.note,.mapbox,.pass,.legend,.sos,.bye{break-inside:avoid}
-  h2,h3,.sec-head{break-after:avoid}
-  .gallery{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .wrap{padding-inline:44px}
+  .sec,.band,.bye{-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .sec{padding-block:44px 36px}
+  .sec-head{margin-bottom:24px}
+  .hero-photo img{aspect-ratio:2/1}
+  .detail img{aspect-ratio:16/10}
+  .gallery{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
   .gallery .wide{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
-  .rail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible;padding-inline:20px;gap:8px}
+  .hero-text{padding:28px 44px 0}
+  .quick-wrap{padding-block:26px 40px}
+  .quick{grid-template-columns:repeat(4,minmax(0,1fr))}.q.wide2{grid-column:auto}
+  .rule,.q,.r,.ap,.place,.steps li,.hosts,.cred,.heads-up,.metro,.fact,.shot,.detail,.addr,.note,.mapbox,.pass,.legend,.sos,.grp{break-inside:avoid}
+  h2,h3,.sec-head,.eyebrow{break-after:avoid}
+  #boas-vindas,#predio,#restaurantes,#saida{break-before:page}
+  #wifi{padding-block:24px 40px!important}
+  .rules{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .amen,.amen > div{break-inside:avoid}
+  .groups.cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 34px}
+  .place{padding-block:6px}.groups{gap:16px}.ess{gap:18px 36px}
+  #perto.sec{padding-block:36px 26px}#perto .sec-head{margin-bottom:12px}#perto p.small{margin-top:14px!important}
+  .check label{padding-block:8px}
+  .rail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible;padding-inline:44px;gap:10px}
   .rail .shot{flex:none;width:auto}
-  .mapscroll{overflow:visible!important;max-height:none!important;background:#EDE6D3}
+  .mapscroll{overflow:visible!important;max-height:none!important}
   .mapscroll svg,.mapscroll:not(.zoomed) svg{width:560px!important;max-width:100%;max-height:none!important;margin-inline:auto}
   #map{--us:1!important}
   .mk .lbl,.poi .lbl{display:none}
   .rlist{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .bye{min-height:0}.bye-in{padding-block:56px}
+  .bye-in{padding-block:36px}
+  .bye{break-inside:avoid}
   .pgfoot{padding-block:14px 0}
 }
 </style>
